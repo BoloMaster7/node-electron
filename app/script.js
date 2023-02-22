@@ -8,20 +8,31 @@ const App =() => {
       const [time, setTime] = useState(null);
       const [timer, setTimer] = useState(null);
 
-      
-      const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((time % (1000 * 60)) / 1000);
+      let timeleft = 1200;
+      let minutes = parseInt(timeleft / 60, 10);
+      let seconds = parseInt(timeleft % 60, 10);
      
 
     
       const startTimer = () => {
-        setTime(1200);
+        setTime(timeleft);
         setStatus('work');
         setTimer(setInterval(() => {
-          setTime(time => time + 1);
+          setTime(time => time -1);
         }));
-    }
+  }
 
+            useEffect(() => {
+          if (timeleft=== 0){
+            if(status === 'work'){
+            setStatus('rest'),
+            setTime(20)
+          
+            }else (status === 'rest')
+            setStatus('work'),
+            setTime(timeleft)       
+           }
+  })
   
       return (
       <div>

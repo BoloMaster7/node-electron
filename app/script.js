@@ -8,10 +8,10 @@ const App =() => {
       const [time, setTime] = useState(null);
       const [timer, setTimer] = useState(null);
 
-      const formatTime = () => {
+      
       const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((time % (1000 * 60)) / 1000);
-      }
+     
 
     
       const startTimer = () => {
@@ -36,7 +36,7 @@ const App =() => {
         { status === 'rest' && (<img src="./images/rest.png" />)}
         { status !== 'off' && (
           <div className="timer">
-            {formatTime.minutes}:{formatTime.seconds}
+            {minutes}:{seconds}
           </div>
         )}
         { status === 'off' && (<button className="btn" onClick={startTimer}>Start</button>)}

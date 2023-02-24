@@ -9,31 +9,46 @@ const App =() => {
       const [timer, setTimer] = useState(null);
 
       let timeleft = 1200;
-      let minutes = parseInt(timeleft / 60, 10);
-      let seconds = parseInt(timeleft % 60, 10);
-     
+      // let minutes = parseInt(timeleft / 60, 10);
+      // let seconds = parseInt(timeleft % 60, 10);
+      let seconds = String(Math.floor(time % 60)).padStart(2, '0');
+      let minutes = String(Math.floor(time / 60)).padStart(2, '0');
 
     
       const startTimer = () => {
-        setTime(timeleft);
+        setTime(1200);
         setStatus('work');
         setTimer(setInterval(() => {
           setTime(time => time -1);
-        }));
+        },1000));
   }
 
             useEffect(() => {
-          if (timeleft=== 0){
+          if (time=== 0){
             if(status === 'work'){
             setStatus('rest'),
             setTime(20)
           
             }else (status === 'rest')
             setStatus('work'),
-            setTime(timeleft)       
+            setTime(1200)       
            }
   })
   
+
+  const stopTimer =() => {
+    setStatus('off');
+    setTime(null)
+    setTimer(null)
+    // dlaczego w tym przypadku nie dziala setTimer(0)?
+  }
+
+  
+  const closeApp = () => {
+    window.close()
+  }
+
+
       return (
       <div>
         <h1>Protect your eyes</h1>
@@ -51,8 +66,8 @@ const App =() => {
           </div>
         )}
         { status === 'off' && (<button className="btn" onClick={startTimer}>Start</button>)}
-        { status !== 'off' && (<button className="btn">Stop</button>)}
-        <button className="btn btn-close">X</button>
+        { status !== 'off' && (<button className="btn" onClick={stopTimer}>Stop</button>)}
+        <button className="btn btn-close"onClick={closeApp}>X</button>
       </div>
     );
   }
